@@ -64,4 +64,65 @@ LIMIT 10;
 |Average of all GM vehicles produced and used in the 10 year life-cycle.|100621|
 
 
+### Which industry contribute the most to carbon emissions?
+TOP 10 Product and the Indesutry of product that have the highest AVG PCF
+```sql
+SELECT
+  pe.product_name,
+  ig.industry_group,
+  ROUND(AVG(pe.carbon_footprint_pcf), 2) AS 'Average PCF'
+  
+FROM product_emissions pe	
+LEFT JOIN
+	industry_groups ig ON pe.industry_group_id = ig.id 
+GROUP BY
+	pe.product_name 
+ORDER BY
+  AVG(pe.carbon_footprint_pcf) DESC
+LIMIT 10;
+```
+|product_name|industry_group|Average PCF|
+|------------|--------------|-----------|
+|Wind Turbine G128 5 Megawats|Electrical Equipment and Machinery|3718044.00|
+|Wind Turbine G132 5 Megawats|Electrical Equipment and Machinery|3276187.00|
+|Wind Turbine G114 2 Megawats|Electrical Equipment and Machinery|1532608.00|
+|Wind Turbine G90 2 Megawats|Electrical Equipment and Machinery|1251625.00|
+|Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.|Automobiles & Components|191687.00|
+|Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall|Materials|167000.00|
+|TCDE|Materials|99075.00|
+|Mercedes-Benz GLE (GLE 500 4MATIC)|Automobiles & Components|91000.00|
+|Mercedes-Benz S-Class (S 500)|Automobiles & Components|85000.00|
+|Mercedes-Benz SL (SL 350)|Automobiles & Components|72000.00|
+
+TOP 10 Industry with the highest of Total PCF
+```sql
+SELECT
+  ig.industry_group,
+  ROUND(SUM(pe.carbon_footprint_pcf), 2) AS 'Total PCF'
+FROM product_emissions pe	
+LEFT JOIN
+	industry_groups ig ON pe.industry_group_id = ig.id 
+GROUP BY
+	ig.industry_group 
+ORDER BY 	
+	SUM(pe.carbon_footprint_pcf) DESC 
+LIMIT 10;
+```
+|industry_group|Total PCF|
+|--------------|---------|
+|Electrical Equipment and Machinery|9801558.00|
+|Automobiles & Components|2582264.00|
+|Materials|577595.00|
+|Technology Hardware & Equipment|363776.00|
+|Capital Goods|258712.00|
+|"Food, Beverage & Tobacco"|111131.00|
+|"Pharmaceuticals, Biotechnology & Life Sciences"|72486.00|
+|Chemicals|62369.00|
+|Software & Services|46544.00|
+|Media|23017.00|
+
+Top 3 Industry that have the most PCF is Electrical Equipment and Machinery, Automobiles & Components and Materials. Most of those industry is heavy industry.
+
+
+
 
