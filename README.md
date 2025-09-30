@@ -9,7 +9,7 @@ Through this analysis, we hope to gain an understanding of the environmental imp
 ur dataset is compiled from publicly available data from nature.com and encompasses the product carbon footprints (PCF) for various companies. PCFs represent the greenhouse gas emissions associated with specific products, quantified in CO2 (carbon dioxide equivalent).
 
 ## Data Structure
-
+![](https://github.com/nguyenngoctu-swisscoding/carbon-emission-analysis/blob/main/Database%20diagram.png)
 
 ## Data Sample
 
